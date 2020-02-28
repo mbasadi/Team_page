@@ -1,0 +1,23 @@
+@import "common";
+
+.homebutton{
+  width: 10%;
+  height:50px ;
+  background-color: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px $grey;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+ 
+
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-weight: bold;
+}
+
