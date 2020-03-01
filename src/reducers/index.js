@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import allReducers from './teams_users_activeItem_reducer'
+import allReducers from './tempoReducers'
 const rootReducer = combineReducers({
   appState: allReducers
 });

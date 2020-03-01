@@ -7,8 +7,8 @@ import '../assets/styles/loading.scss';
 import '../assets/styles/homePage.scss';
 import { connect } from 'react-redux'
 import { fetchTeams, selectItem, fetchUsers } from '../actions/index'
-import TeamList from './team-list'
-import DetailCards from './details_card'
+import TeamList from './teamList'
+import DetailCards from './detailsCard'
 class Results extends Component {
 
   componentDidMount() {
