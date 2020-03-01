@@ -1,19 +1,20 @@
 @import "common";
 
-.cardContainerWithDetail {
-  width: 30%;
-  background-color: #fff;
-  box-sizing: border-box;
-  box-shadow: 0 2px 8px $grey;
+.CardsWrapperNoDetailPart {
+
+
+
+  
   display: flex;
+  flex-direction: row;
   align-items: center;
   margin-top: 20px;
-  height:200px ;
-
+  flex-wrap: wrap;
+  justify-content: space-around;
  
-
   .infoWrapper {
-    width: 100%;
+    background-color: #fff;
+    width: 400px;
     height: 100%;
     padding-left: 10px;
     padding-top: 20px;
@@ -22,14 +23,17 @@
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-
-    .title{
-      font-weight: bold;
-    }
-
+    margin-top: 20px;
+    box-shadow: 0 2px 8px $grey;
+    cursor: pointer;
   
-
+  }
+  .title{
+    font-weight: bold;
+    margin-left: 25%;
+  }
     .overview {
+      margin-left: 5%;
       white-space: normal;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -39,36 +43,47 @@
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
     }
-  }
+  // }
 
 }
-.cardContainerNoDetail{
-  width: 80%;
-  background-color: #fff;
-  box-sizing: border-box;
-  box-shadow: 0 2px 8px $grey;
+.CardsWrapperWithDetailPart{
+  height: 100%;
+  width: 20%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  height:50px ;
-
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
  
-
   .infoWrapper {
-    width: 100%;
-    height: 100%;
-    padding-left: 10px;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    background-color: #fff;
+    width: 80%;
+    height: 50px;
+    // padding-left: 10px;
+    // padding-top: 20px;
+    // padding-bottom: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-
-    .title{
-      font-weight: bold;
-    }
+    // justify-content: space-between;
+    // box-sizing: border-box;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px $grey;
+    // border-radius:5%;
+    justify-content: center;
+    align-items: center;
+    border-radius:25%;
+    cursor: pointer;
   }
+  .title{
+    font-weight: bold;
+    // margin-left: 25%;
+    // margin-top: 7%;
+  }
+   
 }
 
 // @media (max-width:1280px) {
@@ -100,18 +115,8 @@
 //   }
 // }
 
-// @media (max-width: 768px) {
-//   .cardContainer {
-//     width: 100%;
-//     .title{
-//       font-size: 12px;
-//     }
-//     .release_date{
-//       font-size: 10px;
-//     }
-//     .overview {
-//       font-size: 10px;
-//     }
-//   }
-// }
+@media (max-width: 768px) {
+  .CardsWrapperWithDetailPart {
 
+    display: none;}
+}

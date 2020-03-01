@@ -2,12 +2,20 @@ import React, { Component } from "react";
 import { connect } from 'react-redux'
 import '../assets/styles/searchBar.scss';
 import { selectItem } from '../actions/index'
-import { bindActionCreators } from 'redux'
+
 class SearchBar extends Component {
   onSearchInputChange(term) {
     let searchList = [];
-    this.props.teams.map((team) => { searchList.push({ id: team.id, name: team.name }) });
-    this.props.users.map((user) => { searchList.push({ id: user.userId, name: `${user.name.first} ${user.name.last}` }) });
+    this.props.teams.map((team) => {
+      return (
+        searchList.push({ id: team.id, name: team.name })
+      )
+    });
+    this.props.users.map((user) => {
+      return (
+        searchList.push({ id: user.userId, name: `${user.name.first} ${user.name.last}` })
+      )
+    });
 
     searchList = searchList.filter((item) => {
       if (item.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())) {
@@ -38,12 +46,8 @@ class SearchBar extends Component {
 }
 
 function mapStateToProps(state) {
-  return { teams: state.teams, activeItem: state.activeItem, users: state.users, findedTeam: state.findedTeam };
+  return { teams: state.appState.teams, users: state.appState.users };
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    selectItem: selectItem
-  }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+
+export default connect(mapStateToProps, { selectItem: selectItem })(SearchBar);
 

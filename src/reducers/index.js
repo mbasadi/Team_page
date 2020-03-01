@@ -1,10 +1,7 @@
 import { combineReducers } from "redux";
-import TeamsReducer from "./reducer_teams";
-import UsersReducer from "./reducer_users";
-import ActiveItem from "./reducer_active_item";
+
+import allReducers from './teams_users_activeItem_reducer'
 const rootReducer = combineReducers({
-  teams: TeamsReducer,
-  activeItem: ActiveItem,
-  users: UsersReducer,
+  appState: allReducers
 });
 export default rootReducer;

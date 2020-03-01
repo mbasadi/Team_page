@@ -7,13 +7,10 @@ import '../assets/styles/loading.scss';
 import '../assets/styles/homePage.scss';
 import { connect } from 'react-redux'
 import { fetchTeams, selectItem, fetchUsers } from '../actions/index'
-import { bindActionCreators } from 'redux'
 import TeamList from './team-list'
 import DetailCards from './details_card'
 class Results extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   componentDidMount() {
     this.props.fetchTeams();
 
@@ -23,7 +20,9 @@ class Results extends Component {
     if (this.props.teams.length === 0) {
       return <Loading className="loaderContainer" />
     }
+
     if (typeof (this.props.activeItem) === 'string') {
+
       let itemNumber = this.props.teams.filter(team => team.id === this.props.activeItem);
       let itemType
       if (itemNumber.length === 1) {
@@ -41,9 +40,9 @@ class Results extends Component {
               this.props.selectItem(0);
             }}
           >
-            
-                Home page
-             
+           
+              Home page
+   
           </div>
           <div className='cardsMain'>
             <TeamList />
@@ -54,8 +53,9 @@ class Results extends Component {
     };
 
     return (
-      <TeamList />
-
+      <div>
+        <TeamList />
+      </div>
     );
   }
   render() {
@@ -68,11 +68,7 @@ class Results extends Component {
   }
 }
 function mapStateToProps(state) {
-  return { teams: state.teams, activeItem: state.activeItem, users: state.users };
+  return { teams: state.appState.teams, activeItem: state.appState.activeItem };
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    fetchTeams: fetchTeams, fetchUsers: fetchUsers, selectItem: selectItem
-  }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Results);
+
+export default connect(mapStateToProps, {fetchTeams: fetchTeams, selectItem: selectItem})(Results);

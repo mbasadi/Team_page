@@ -4,19 +4,15 @@
   justify-content: flex-start;
   flex-wrap: wrap;
 }
-.CardsWrapperNoDetails{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
+
 .CardsWrapperWithDetails{
+  
   flex-direction: column;
   width:30%;
 }
-.CardDetails{
-  flex-direction: column;
-}
+// .CardDetails{
+//   flex-direction: column;
+// }
 @media (max-width:768px) {
   .CardsWrapper {
     display: block;

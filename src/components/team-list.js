@@ -1,16 +1,11 @@
 
 import React, { Component } from "react";
-import Loading from "../components/loading";
-import '../assets/styles/loading.scss';
 import '../assets/styles/detailsCard.scss';
 import '../assets/styles/app.scss';
 import { connect } from 'react-redux'
 import { fetchUsers, selectItem } from '../actions/index'
-import { bindActionCreators } from 'redux'
 class TeamList extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   componentDidMount() {
     this.props.fetchUsers();
   }
@@ -23,7 +18,9 @@ class TeamList extends Component {
       )
     }
     return (
-      <p className={"overview"}>
+      <p
+
+      >
         This team has {members.length} members.
             </p>
     )
@@ -33,35 +30,36 @@ class TeamList extends Component {
       if (this.props.activeItem.length > 0) {
         return (
           <div
-            className="cardContainerNoDetail"
+            className={"infoWrapper"}
+
             key={team.id}
             onClick={() => {
               this.props.selectItem(team.id);
-            }}
+            }
+            }
           >
-            <div className={"infoWrapper"}>
-              <div className={"title"}>
-                {team.name}
-              </div>
+            <div className={"title"}   >
+
+              {team.name}
+
             </div>
-          </div>
+          </div >
         );
       } else {
         const members = this.props.users.filter(user => user.teamId === team.id);
         return (
           <div
-            className="cardContainerWithDetail"
+            className={"infoWrapper"}
             key={team.id}
             onClick={() => {
               this.props.selectItem(team.id);
-            }}
-          >
-            <div className={"infoWrapper"}>
+            }} >
+            <div className={"overview"} >
               <div className={"title"}>
                 {team.name}
               </div>
               {this.helper(members)}
-              <p className={"overview"}>
+              <p>
                 Leads by: {team.teamLeadName.first} {team.teamLeadName.last}
               </p>
             </div>
@@ -73,7 +71,10 @@ class TeamList extends Component {
   }
   render() {
     return (
-      <div className={(this.props.activeItem.length > 0) ? "CardsWrapperWithDetails" : "CardsWrapperNoDetails"}>
+      <div
+        className={(this.props.activeItem.length > 0) ? "CardsWrapperWithDetailPart" : "CardsWrapperNoDetailPart"}
+
+      >
         {this.renderList()}
       </div>
 
@@ -81,12 +82,6 @@ class TeamList extends Component {
   }
 }
 function mapStateToProps(state) {
-  return { teams: state.teams, activeItem: state.activeItem, users: state.users };
+  return { teams: state.appState.teams, activeItem: state.appState.activeItem, users: state.appState.users };
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    selectItem: selectItem,
-    fetchUsers: fetchUsers
-  }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(TeamList);
+export default connect(mapStateToProps, { selectItem: selectItem, fetchUsers: fetchUsers })(TeamList);

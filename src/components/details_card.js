@@ -1,23 +1,22 @@
 
 import React, { Component } from "react";
-import Loading from "../components/loading";
+import Loading from "./loading";
 import '../assets/styles/loading.scss';
-import '../assets/styles/teamCard.scss';
 import '../assets/styles/app.scss';
 import { connect } from 'react-redux'
 import { selectItem } from '../actions/index'
-import { bindActionCreators } from 'redux'
+
 class DetailCards extends Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   teammembers(members) {
 
 
     if (members.length === 0) {
       return (
-        <div>
+        <div
+          className={"nonmember"}
+        >
           This team does not have a member yet.
         </div>
       )
@@ -26,7 +25,8 @@ class DetailCards extends Component {
       return (
         <div
           key={member.userId}
-          className="member"
+          className={"member"}
+
           onClick={() => {
             this.props.selectItem(member.userId)
           }}
@@ -41,9 +41,15 @@ class DetailCards extends Component {
   renderList() {
     if (this.props.activeItem === 'nosearchresult') {
       return (
-        <div className="detailCard">
-          <div className={"infoWrapper"}>
-            <div className={"title"}>
+        <div
+          className="noResult"
+        >
+          <div
+            className={"infoWrapper"}
+          >
+            <div
+              className={"title"}
+            >
               No search result :(
             </div>
           </div>
@@ -63,21 +69,34 @@ class DetailCards extends Component {
       return (
 
         <div
-          className="detailCard">
-          <div className={"infoWrapper"}>
-            <div className={"title"}>
+          className="team"
+        >
+          <div
+            className={"infoWrapper"}
+          >
+            <div
+              className={"title"}
+            >
               Team:  {item[0].name}
             </div>
-            <p className={"overview"}>
+            <p
+              className={"overview"}
+            >
               Leads by: {item[0].teamLeadName.first} {item[0].teamLeadName.last}
             </p>
-            <p className={"overview"}>
+            <p
+              className={"overview"}
+            >
               This team has {members.length} members.
             </p>
-            <div className={"title"}>
+            <div
+              className={"title"}
+            >
               Members
             </div>
-            <div className="teamMembers">
+            <div
+              className="teamMembers"
+            >
               {this.teammembers(members)}
             </div>
           </div>
@@ -91,32 +110,43 @@ class DetailCards extends Component {
 
       return (
         <div
-          className="detailCard">
-          <div className={"infoWrapper"}>
-            <div className={"title"}>
+          className="user"
+        >
+          <div
+            className={"infoWrapper"}
+          >
+            <div
+              className={"title"}
+            >
               User:  {item[0].name.first} {item[0].name.last}
             </div>
             <div >
               Team:
             </div>
-            <div className="teamMembers">
+            <div
+              className="teamMembers"
+            >
               <div
                 onClick={() => {
                   this.props.selectItem(userteam[0].id)
                 }}
-                className="member">
+                className="member"
+              >
                 {userteam[0].name}
               </div>
             </div>
             <div>
               Leads by:
               </div>
-            <div className="teamMembers">
+            <div
+              className="teamMembers"
+            >
               <div
                 onClick={() => {
                   this.props.selectItem(userteam[0].teamLead)
                 }}
-                className="member">
+                className="member"
+              >
                 {userteam[0].teamLeadName.first} {userteam[0].teamLeadName.last}
               </div>
             </div>
@@ -130,7 +160,7 @@ class DetailCards extends Component {
     return (
 
 
-      <div className="CardsWrapperWithDetails">
+      <div className="detailCard">
         {this.renderList()}
       </div>
 
@@ -138,11 +168,7 @@ class DetailCards extends Component {
   }
 }
 function mapStateToProps(state) {
-  return { teams: state.teams, activeItem: state.activeItem, users: state.users, findedTeam: state.findedTeam };
+  return { teams: state.appState.teams, activeItem: state.appState.activeItem, users: state.appState.users };
 }
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    selectItem: selectItem,
-  }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(DetailCards);
+
+export default connect(mapStateToProps, { selectItem: selectItem })(DetailCards);

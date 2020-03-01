@@ -3,14 +3,14 @@
 .homebutton{
   width: 10%;
   height:50px ;
-  background-color: #fff;
+  background-color:#fff;
   box-sizing: border-box;
   box-shadow: 0 2px 8px $grey;
   display: flex;
   align-items: center;
   margin-top: 20px;
  
-
+margin-left: 3%;
   padding-left: 10px;
   padding-top: 20px;
   padding-bottom: 10px;
@@ -19,5 +19,12 @@
   justify-content: space-between;
 
   font-weight: bold;
+  cursor: pointer;
+  border-radius:45%;
 }
 
+@media (max-width: 768px) {
+  .homebutton {
+    margin-left: 30%;
+    width: 40%;}
+}
