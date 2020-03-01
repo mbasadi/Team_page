@@ -1,8 +1,8 @@
-This project has been developed based on a thechnical exersice provided by "Tempo Talent Team".
+This project has been developed based on a technical exercise provided by the "Tempo Talent Team".
 
-Major liberies are : React and Redux. 
+Major libraries are: React and Redux.
 
-Redux is used for managing the app state where axios is used and redux-thunk is the middleware.
+Redux is used for managing the app state where axios is used, and redux-thunk is the middleware.
 
 Styles are written in scss format.
 
