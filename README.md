@@ -4,7 +4,7 @@ Major liberies are : React and Redux.
 
 Redux is used for managing the app state where axios is used and redux-thunk is the middleware.
 
-Styles are written in scss.
+Styles are written in scss format.
 
 
 
