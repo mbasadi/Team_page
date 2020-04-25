@@ -1,4 +1,4 @@
-This project has been developed based on a technical exercise provided by the "Tempo Talent Team".
+This project has been developed based on a technical exercise to implement the single source of truth.
 
 Major libraries are: React and Redux.
 
