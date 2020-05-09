@@ -16,7 +16,7 @@ class SearchBar extends Component {
       });
     });
 
-    searchList = searchList.filter((item) => {
+    searchList = searchList.forEach((item) => {
       if (item.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())) {
         return item;
       }
