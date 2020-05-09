@@ -20,6 +20,7 @@ class SearchBar extends Component {
       if (item.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())) {
         return item;
       }
+      return;
     });
     if (searchList.length > 0) {
       this.props.selectItem(searchList[0].id);
