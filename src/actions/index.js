@@ -6,7 +6,7 @@ export function fetchTeams() {
       axiosConfig('get', 'teams', (response1) => {
         let count = 0;
         const teamLength = response1.data.length;
-        response1.data.map((element) => {
+        response1.data.forEach((element) => {
           if (element.teamLead) {
             axiosConfig('get', `users/${element.teamLead}/`, (response2) => {
               count++;
@@ -22,7 +22,6 @@ export function fetchTeams() {
               last: 'filled yet.',
             };
           }
-          return;
         });
       });
     });
@@ -40,7 +39,7 @@ export function fetchUsers() {
       axiosConfig('get', 'users', (response1) => {
         let count = 0;
         const userLength = response1.data.length;
-        response1.data.map((user) => {
+        response1.data.forEach((user) => {
           if (user.userId) {
             axiosConfig('get', `users/${user.userId}/`, (response2) => {
               count++;
@@ -53,7 +52,6 @@ export function fetchUsers() {
             count++;
             user.name = { first: 'The position is not', last: 'filled yet.' };
           }
-          return;
         });
       });
     });
