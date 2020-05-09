@@ -1,56 +1,51 @@
-
-import React, { Component } from "react";
-import Loading from "../components/loading";
+import React, { Component } from 'react';
+import Loading from '../components/loading';
 import '../assets/styles/teamCard.scss';
 import '../assets/styles/app.scss';
 import '../assets/styles/loading.scss';
 import '../assets/styles/homePage.scss';
-import { connect } from 'react-redux'
-import { fetchTeams, selectItem, fetchUsers } from '../actions/index'
-import TeamList from './teamList'
-import DetailCards from './detailsCard'
+import { connect } from 'react-redux';
+import { fetchTeams, selectItem } from '../actions/index';
+import TeamList from './teamList';
+import DetailCards from './detailsCard';
 class Results extends Component {
-
   componentDidMount() {
     this.props.fetchTeams();
-
-  };
+  }
 
   renderResults() {
     if (this.props.teams.length === 0) {
-      return <Loading className="loaderContainer" />
+      return <Loading className="loaderContainer" />;
     }
 
-    if (typeof (this.props.activeItem) === 'string') {
-
-      let itemNumber = this.props.teams.filter(team => team.id === this.props.activeItem);
-      let itemType
+    if (typeof this.props.activeItem === 'string') {
+      let itemNumber = this.props.teams.filter(
+        (team) => team.id === this.props.activeItem
+      );
+      let itemType;
       if (itemNumber.length === 1) {
-        itemType = "team"
+        itemType = 'team';
       } else {
-        itemType = "user";
-      };
+        itemType = 'user';
+      }
 
       return (
         <div>
           <div
             className="homebutton"
-
             onClick={() => {
               this.props.selectItem(0);
             }}
           >
-           
-              Home page
-   
+            Home page
           </div>
-          <div className='cardsMain'>
+          <div className="cardsMain">
             <TeamList />
             <DetailCards itemType={itemType} />
           </div>
         </div>
-      )
-    };
+      );
+    }
 
     return (
       <div>
@@ -59,16 +54,14 @@ class Results extends Component {
     );
   }
   render() {
-    return (
-      <div >
-        {this.renderResults()}
-      </div>
-
-    );
+    return <div>{this.renderResults()}</div>;
   }
 }
 function mapStateToProps(state) {
   return { teams: state.appState.teams, activeItem: state.appState.activeItem };
 }
 
-export default connect(mapStateToProps, {fetchTeams: fetchTeams, selectItem: selectItem})(Results);
+export default connect(mapStateToProps, {
+  fetchTeams: fetchTeams,
+  selectItem: selectItem,
+})(Results);

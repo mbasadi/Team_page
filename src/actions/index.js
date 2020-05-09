@@ -1,85 +1,71 @@
-import axiosConfig from "../utils/axiosConfig";
-import {
-  FETCH_TEAMS,
-  ITEM_SELECTED,
-  FETCH_USERS
-} from './types';
+import axiosConfig from '../utils/axiosConfig';
+import { FETCH_TEAMS, ITEM_SELECTED, FETCH_USERS } from './types';
 export function fetchTeams() {
   return (dispatch) => {
     let mainTeamPromise = new Promise((resolve, reject) => {
-      axiosConfig('get', "teams",
-        (response1) => {
-          let count = 0;
-          const teamLength = response1.data.length;
-          response1.data.map(element => {
-            if (element.teamLead) {
-              axiosConfig('get', `users/${element.teamLead}/`,
-                (response2) => {
-                  count++;
-                  element.teamLeadName = response2.data.name;
-                  if (count === teamLength) {
-                    resolve(response1.data)
-                  }
-                })
-            } else {
+      axiosConfig('get', 'teams', (response1) => {
+        let count = 0;
+        const teamLength = response1.data.length;
+        response1.data.map((element) => {
+          if (element.teamLead) {
+            axiosConfig('get', `users/${element.teamLead}/`, (response2) => {
               count++;
-              element.teamLeadName = { first: "The position is not", last: "filled yet." };
-            }
-
-          })
-        }
-      );
+              element.teamLeadName = response2.data.name;
+              if (count === teamLength) {
+                return resolve(response1.data);
+              }
+            });
+          } else {
+            count++;
+            element.teamLeadName = {
+              first: 'The position is not',
+              last: 'filled yet.',
+            };
+          }
+        });
+      });
     });
     mainTeamPromise.then((data) => {
       dispatch({
         type: FETCH_TEAMS,
-        payload: { teams: data }
-      })
+        payload: { teams: data },
+      });
     });
-  }
+  };
 }
-;
 export function fetchUsers() {
-
   return (dispatch) => {
     let firstTeamPromise = new Promise((resolve, reject) => {
-      axiosConfig('get', "users",
-        (response1) => {
-          let count = 0;
-          const userLength = response1.data.length;
-          response1.data.map(user => {
-            if (user.userId) {
-              axiosConfig('get', `users/${user.userId}/`,
-                (response2) => {
-                  count++;
-                  user.name = response2.data.name;
-                  if (count === userLength) {
-                    resolve(response1.data)
-                  }
-                })
-            } else {
+      axiosConfig('get', 'users', (response1) => {
+        let count = 0;
+        const userLength = response1.data.length;
+        response1.data.map((user) => {
+          if (user.userId) {
+            axiosConfig('get', `users/${user.userId}/`, (response2) => {
               count++;
-              user.name = { first: "The position is not", last: "filled yet." };
-            }
-
-          })
-        }
-      );
+              user.name = response2.data.name;
+              if (count === userLength) {
+                return resolve(response1.data);
+              }
+            });
+          } else {
+            count++;
+            user.name = { first: 'The position is not', last: 'filled yet.' };
+          }
+        });
+      });
     });
     firstTeamPromise.then((data) => {
       dispatch({
         type: FETCH_USERS,
-        payload: { users: data }
-      })
+        payload: { users: data },
+      });
     });
   };
-};
+}
 export function selectItem(item) {
-
   return {
     type: ITEM_SELECTED,
-    payload: { slecteditem: item }
+    payload: { slecteditem: item },
   };
 }
-
-
