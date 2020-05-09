@@ -12,7 +12,7 @@ export function fetchTeams() {
               count++;
               element.teamLeadName = response2.data.name;
               if (count === teamLength) {
-                return resolve(response1.data);
+                resolve(response1.data);
               }
             });
           } else {
@@ -22,6 +22,7 @@ export function fetchTeams() {
               last: 'filled yet.',
             };
           }
+          return;
         });
       });
     });
@@ -45,13 +46,14 @@ export function fetchUsers() {
               count++;
               user.name = response2.data.name;
               if (count === userLength) {
-                return resolve(response1.data);
+                resolve(response1.data);
               }
             });
           } else {
             count++;
             user.name = { first: 'The position is not', last: 'filled yet.' };
           }
+          return;
         });
       });
     });

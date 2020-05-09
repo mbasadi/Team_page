@@ -20,15 +20,16 @@ class SearchBar extends Component {
       if (item.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())) {
         return item;
       }
+      return;
     });
     if (searchList.length > 0) {
-      return this.props.selectItem(searchList[0].id);
+      this.props.selectItem(searchList[0].id);
     } else {
       this.props.selectItem('nosearchresult');
     }
 
     if (term.length === 0) {
-      return this.props.selectItem(0);
+      this.props.selectItem(0);
     }
   }
   render() {
